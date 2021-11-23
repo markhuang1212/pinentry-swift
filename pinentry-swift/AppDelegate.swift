@@ -41,6 +41,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                            prompt: pctrl.prompt,
                                            errorText: pctrl.errorText,
                                            timeout: pctrl.timeout)
+
+//        window.setContentSize(contentViewController.view.frame.size)
+//        window.frame.size = window.contentView?.fittingSize
+//        window.makeKeyAndOrderFront(self)
+        window.setContentSize(window.contentView!.fittingSize)
+        NSApp.activate(ignoringOtherApps: true)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
