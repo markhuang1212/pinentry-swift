@@ -12,16 +12,21 @@ import os
 
 let keychain = KeychainSwift()
 
-func defaultGetPinFunc() async -> String {
-    return ""
+func defaultGetPinFunc(_ controller: PinentryController) async -> String? {
+    return nil
 }
 
 func defaultGetPinFromCacheFunc(keyinfo: String) async -> String? {
-    if(await defaultConfirmFunc()) {
-        return keychain.get(keyinfo)
-    } else {
-        return nil
+    if let ret = keychain.get(keyinfo) {
+        if await defaultConfirmFunc() {
+            return ret
+        }
     }
+    return nil
+}
+
+func defaultDelPinFunc(keyinfo: String) {
+    keychain.delete(keyinfo)
 }
 
 func defaultConfirmFunc() async -> Bool {
@@ -43,24 +48,26 @@ class PinentryController {
     static let shared = PinentryController()
     
     var cacheEnabled = false
-    var keyInfo = ""
+    var keyInfo: String? = nil
     
-    var OkFunc: () -> () = {}
-    var CancelFunc: () -> () = {}
-    var GetPinFunc: () async -> String = defaultGetPinFunc
+    var OkFunc = {}
+    var CancelFunc = {}
+    var GetPinFunc = defaultGetPinFunc
     var GetPinFromCacheFunc: (_ keyinfo: String) async -> String? = defaultGetPinFromCacheFunc
     var GetConfirmFunc: () async -> Bool = defaultConfirmFunc
     var SavePinFunc: (_ keyinfo: String, _ pin: String) -> () = defaultSavePinFunc
+    var DelPinFunc = defaultDelPinFunc
     var ByeFunc: () -> () = defaultByeFunc
     
-    var timeout: Int = 0
-    var description: String = ""
-    var prompt: String = ""
-    var title: String = ""
+    var timeout: Int? = nil
+    var description: String? = nil
+    var prompt: String? = nil
+    var title: String? = nil
+    var errorText: String? = nil
+    var pinCache: String? = nil
     
-    var buttonOkText: String = ""
-    var buttonCancelText: String = ""
-    
+    var buttonOkText: String? = nil
+    var buttonCancelText: String? = nil
     
     init(){
         
@@ -70,8 +77,8 @@ class PinentryController {
         guard let x = str.firstIndex(of: " ") else {
             return ""
         }
-        let substr = str[str.index(after: x)...]
-        return String(substr)
+        let substr = String(str[str.index(after: x)...])
+        return substr.removingPercentEncoding!
     }
     
     // run the controller in the background
@@ -114,19 +121,31 @@ class PinentryController {
                         printStdout("OK")
                     case "GETPIN":
                         var pin: String?
-                        if(self.cacheEnabled) {
-                            pin = await self.GetPinFromCacheFunc(self.keyInfo)
-                            if pin == nil {
-                                pin = await self.GetPinFunc()
-                                self.SavePinFunc(self.keyInfo, pin!)
-                            } else {
+                        var isFromCache = false
+                        // get from cache if possible
+                        if(self.cacheEnabled && self.keyInfo != nil) {
+                            pin = await self.GetPinFromCacheFunc(self.keyInfo!)
+                            if pin != nil {
+                                isFromCache = true
+                            }
+                        }
+                        // get from prompt
+                        if pin == nil {
+                            pin = await self.GetPinFunc(self)
+                        }
+                        // report
+                        if pin != nil {
+                            if isFromCache {
                                 printStdout("S PASSWORD_FROM_CACHE")
                             }
+                            if self.cacheEnabled {
+                                self.SavePinFunc(self.keyInfo!, pin!)
+                            }
+                            printStdout("D \(pin!)")
+                            printStdout("OK")
                         } else {
-                            pin = await self.GetPinFunc()
+                            printStdout("ERR")
                         }
-                        printStdout("D \(pin!)")
-                        printStdout("OK")
                     case "CONFIRM":
                         if await self.GetConfirmFunc() {
                             printStdout("OK")
@@ -148,7 +167,14 @@ class PinentryController {
                         }
                     case "GETINFO":
                         printStdout("ERR")
-                    case "SETNOTOK", "SETERROR", "SETQUALITYBAR", "SETQUALITYBAR_TT", "MESSAGE":
+                    case "SETERROR":
+                        self.errorText = PinentryController.getStrTail(str: str)
+                        // on errer, clear the cache
+                        if(self.keyInfo != nil) {
+                            self.DelPinFunc(self.keyInfo!)
+                        }
+                        printStdout("OK")
+                    case "SETNOTOK", "SETQUALITYBAR", "SETQUALITYBAR_TT", "MESSAGE":
                         printStdout("OK")
                     case "BYE":
                         self.ByeFunc()

@@ -43,14 +43,43 @@ class KeyInputController: NSViewController {
         actionCondition.unlock()
     }
     
-    func waitForPin() async -> String {
+    func updateWindow(titleText: String?, descriptionText: String?, okText: String?,
+                      cancelText: String?, prompt: String?, errorText: String?) {
+        psdInput.stringValue = ""
+        if let titleText = titleText {
+            titleTextField.stringValue = titleText
+        }
+        if let descriptionText = descriptionText {
+            descTextField.stringValue = descriptionText
+        }
+        if let errorText = errorText {
+            descTextField.stringValue = errorText
+            descTextField.textColor = NSColor(ciColor: .red)
+            psdInput.drawFocusRingMask()
+        }
+        if let okText = okText {
+            okButton.title = okText
+        }
+        if let cancelText = cancelText {
+            cancelButton.title = cancelText
+        }
+        if let prompt = prompt {
+            psdInput.placeholderString = prompt
+        }
+    }
+    
+    func waitForPin() async -> String? {
         return await withCheckedContinuation() { continuation in
             DispatchQueue.global(qos: .background).async { [weak self] in
                 self!.actionCondition.lock()
                 self!.actionCondition.wait()
                 DispatchQueue.main.async { [weak self] in
+                    if(self!.action == 1) {
+                        continuation.resume(returning: self!.psdInput.stringValue)
+                    } else {
+                        continuation.resume(returning: nil)
+                    }
                     self!.action = 0
-                    continuation.resume(returning: self!.psdInput.stringValue)
                     self!.actionCondition.unlock()
                 }
             }
