@@ -13,6 +13,8 @@ class KeyInputController: NSViewController {
     
     @IBOutlet weak var descTextField: NSTextField!
     
+    @IBOutlet weak var timeoutTextField: NSTextField!
+    
     @IBOutlet weak var psdInput: NSSecureTextField!
     
     @IBOutlet weak var okButton: NSButton!
@@ -24,6 +26,7 @@ class KeyInputController: NSViewController {
         okButton.action = #selector(onOk)
         cancelButton.action = #selector(onCancel)
         psdInput.placeholderString = "Password"
+        timeoutTextField.stringValue = ""
     }
     
     var action = 0 // 1: ok, 2: cancel
@@ -44,7 +47,7 @@ class KeyInputController: NSViewController {
     }
     
     func updateWindow(titleText: String?, descriptionText: String?, okText: String?,
-                      cancelText: String?, prompt: String?, errorText: String?) {
+                      cancelText: String?, prompt: String?, errorText: String?, timeout: Int?) {
         psdInput.stringValue = ""
         if let titleText = titleText {
             titleTextField.stringValue = titleText
@@ -65,6 +68,22 @@ class KeyInputController: NSViewController {
         }
         if let prompt = prompt {
             psdInput.placeholderString = prompt
+        }
+        if let timeout = timeout {
+            DispatchQueue.global(qos: .background).async { [timeout, weak self] in
+                var timeout = timeout
+                while(timeout > 0) {
+                    sleep(1)
+                    timeout -= 1;
+                    DispatchQueue.main.async { [weak self] in
+                        self?.timeoutTextField.stringValue = String(timeout)
+                    }
+                }
+                self?.actionCondition.lock()
+                self?.action = 2
+                self?.actionCondition.signal()
+                self?.actionCondition.unlock()
+            }
         }
     }
     

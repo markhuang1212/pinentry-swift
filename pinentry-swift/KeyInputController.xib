@@ -5,12 +5,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MainViewController" customModule="pinentry_swift" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="KeyInputController" customModule="pinentry_swift" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="ePq-Gv-I7a" id="apQ-uv-MOl"/>
                 <outlet property="descTextField" destination="X7l-fH-MCf" id="9JF-ik-1Dc"/>
                 <outlet property="okButton" destination="R7K-6x-loW" id="Xmi-Nn-Ywi"/>
                 <outlet property="psdInput" destination="ejg-qX-ycf" id="AkE-W0-QZc"/>
+                <outlet property="timeoutTextField" destination="cVh-2p-Ntx" id="YWR-sQ-Fvt"/>
                 <outlet property="titleTextField" destination="UIk-Ba-W2V" id="CrA-w3-JHz"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -39,27 +40,50 @@
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ejg-qX-ycf">
-                            <rect key="frame" x="0.0" y="0.0" width="196" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="196" id="N7G-67-Fw0"/>
-                            </constraints>
-                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="SaF-RT-rMK">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <allowedInputSourceLocales>
-                                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
-                                </allowedInputSourceLocales>
-                            </secureTextFieldCell>
-                        </secureTextField>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="IBQ-uB-WJf">
+                            <rect key="frame" x="0.0" y="0.0" width="472" height="21"/>
+                            <subviews>
+                                <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ejg-qX-ycf">
+                                    <rect key="frame" x="0.0" y="0.0" width="196" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="196" id="N7G-67-Fw0"/>
+                                    </constraints>
+                                    <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="SaF-RT-rMK">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <allowedInputSourceLocales>
+                                            <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                        </allowedInputSourceLocales>
+                                    </secureTextFieldCell>
+                                </secureTextField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cVh-2p-Ntx">
+                                    <rect key="frame" x="202" y="4" width="272" height="13"/>
+                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Timeout" id="lhC-4q-AYg">
+                                        <font key="font" textStyle="caption1" name=".SFNS-Regular"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="IBQ-uB-WJf" secondAttribute="trailing" id="KeS-kM-kih"/>
                         <constraint firstAttribute="width" constant="472" id="eSk-PF-wmm"/>
                         <constraint firstAttribute="trailing" secondItem="X7l-fH-MCf" secondAttribute="trailing" id="m9C-wj-NH6"/>
                         <constraint firstItem="X7l-fH-MCf" firstAttribute="leading" secondItem="pgE-CI-P3F" secondAttribute="leading" id="nJt-m6-GSR"/>
                         <constraint firstItem="UIk-Ba-W2V" firstAttribute="leading" secondItem="pgE-CI-P3F" secondAttribute="leading" id="o6k-aD-tm9"/>
                         <constraint firstAttribute="trailing" secondItem="UIk-Ba-W2V" secondAttribute="trailing" id="r8i-Mq-SEK"/>
+                        <constraint firstItem="IBQ-uB-WJf" firstAttribute="leading" secondItem="pgE-CI-P3F" secondAttribute="leading" id="zPZ-lX-vac"/>
                     </constraints>
                     <visibilityPriorities>
                         <integer value="1000"/>

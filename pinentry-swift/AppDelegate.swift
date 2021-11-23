@@ -11,6 +11,7 @@ import os
 class WindowDelegate: NSObject, NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
         print("Window Closed!")
+        NSApp.terminate(self)
     }
 }
 
@@ -38,7 +39,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                            okText: pctrl.buttonOkText,
                                            cancelText: pctrl.buttonCancelText,
                                            prompt: pctrl.prompt,
-                                           errorText: pctrl.errorText)
+                                           errorText: pctrl.errorText,
+                                           timeout: pctrl.timeout)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
