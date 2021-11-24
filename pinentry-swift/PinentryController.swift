@@ -7,8 +7,6 @@
 
 import Foundation
 import Cocoa
-import KeychainSwift
-import os
 
 class PinentryController {
     
@@ -20,11 +18,11 @@ class PinentryController {
     var OkFunc = {}
     var CancelFunc = {}
     var GetPinFunc = defaultGetPinFunc
-    var GetPinFromCacheFunc: (_ keyinfo: String) async -> String? = defaultGetPinFromCacheFunc
+    var GetPinFromCacheFunc = defaultGetPinFromCacheFunc
     var GetConfirmFunc = defaultConfirmFunc
-    var SavePinFunc: (_ keyinfo: String, _ pin: String) -> () = defaultSavePinFunc
+    var SavePinFunc = defaultSavePinFunc
     var DelPinFunc = defaultDelPinFunc
-    var ByeFunc: () -> () = defaultByeFunc
+    var ByeFunc = defaultByeFunc
     
     var timeout: Int? = nil
     var description: String? = nil
@@ -53,7 +51,7 @@ class PinentryController {
     
     // run the controller in the background
     func run() {
-        DispatchQueue.global(qos: .background).async { [weak self] in
+        DispatchQueue.global(qos: .background).async {
             Task.init { [weak self] in
                 while let str = readLine(strippingNewline: true)  {
                     logger.log("STDIN \(str, privacy: .public)")

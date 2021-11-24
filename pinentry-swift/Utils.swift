@@ -10,7 +10,7 @@ import LocalAuthentication
 import KeychainSwift
 import Cocoa
 
-let keychain = KeychainSwift()
+let keychain = KeychainSwift(keyPrefix: "PinentrySwift_")
 
 func ConfirmAccessWithBiometrics(reason: String) async -> Bool {
     let ctx = LAContext()
