@@ -116,13 +116,13 @@ class PinentryController {
                             printStdout("D \(pin!)")
                             printStdout("OK")
                         } else {
-                            printStdout("ERR")
+                            printStdout("ERR 83886179 Operation cancelled <Pinentry>")
                         }
                     case "CONFIRM":
                         if await self.GetConfirmFunc(self) {
                             printStdout("OK")
                         } else {
-                            printStdout("ERR ASSUAN_Not_Confirmed")
+                            printStdout("ERR 83886179 Operation cancelled <Pinentry>")
                         }
                     case "SETKEYINFO":
                         let key = PinentryController.getStrTail(str: str)
