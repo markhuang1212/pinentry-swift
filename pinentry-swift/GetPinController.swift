@@ -8,6 +8,7 @@
 import Foundation
 import Cocoa
 
+// UI for Getting the PIN from the user
 class GetPinController {
     
     class TextFieldDelegate: NSObject, NSTextFieldDelegate {
@@ -20,11 +21,13 @@ class GetPinController {
         }
     }
 
-    var delegate1: TextFieldDelegate?
-    var delegate2: TextFieldDelegate?
-    var textBox1: NSTextField?
-    var textBox2: NSTextField?
-    var okButton: NSButton?
+    var delegate1: TextFieldDelegate!
+    var delegate2: TextFieldDelegate!
+    
+    var textBox1: NSTextField!
+    var textBox2: NSTextField!
+    
+    var okButton: NSButton!
     
     func GetPin(_ controller: PinentryController) async -> String? {
         return await withCheckedContinuation() { continuation in
@@ -41,33 +44,40 @@ class GetPinController {
                 alert.addButton(withTitle: controller.buttonCancelText ?? "Cancel")
                 
                 self.textBox1 = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-                self.textBox1!.placeholderString = controller.prompt ?? "Passpharse"
-                alert.accessoryView = self.textBox1!
+                self.textBox1.placeholderString = controller.prompt ?? "Passpharse"
+                
                 
                 if(controller.repeatText != nil) {
+                    
+                    self.textBox2 = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+                    self.textBox2.placeholderString = controller.repeatText ?? "Repeat Passphrase"
+                    
+                    self.textBox1.nextKeyView = self.textBox2!
+                    self.textBox1.frame = NSRect(x: 0, y: 24, width: 200, height: 24)
+                    
                     let stack = NSStackView(frame: NSRect(x: 0, y: 0, width: 200, height: 58))
                     stack.orientation = .vertical
-                    self.textBox2 = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-                    self.textBox2!.placeholderString = controller.repeatText ?? "Repeat Passphrase"
                     stack.addSubview(self.textBox1!)
-                    self.textBox1!.frame = NSRect(x: 0, y: 24, width: 200, height: 24)
                     stack.addSubview(self.textBox2!)
-                    alert.accessoryView = stack
                     
                     self.delegate1 = TextFieldDelegate(checkFunc: self.onInputValueChanged)
-                    self.textBox1!.delegate = self.delegate1
-                    self.textBox1!.nextKeyView = self.textBox2!
+                    self.textBox1.delegate = self.delegate1
                     self.delegate2 = TextFieldDelegate(checkFunc: self.onInputValueChanged)
-                    self.textBox2!.delegate = self.delegate2
+                    self.textBox2.delegate = self.delegate2
                     
                     self.okButton = alert.buttons[0]
+                    
+                    alert.accessoryView = stack
+                } else {
+                    alert.accessoryView = self.textBox1!
                 }
-                alert.window.initialFirstResponder = self.textBox1!
+                
+                alert.window.initialFirstResponder = self.textBox1
                 NSApp.activate(ignoringOtherApps: true)
                 let ret = alert.runModal()
                 
                 if(ret.rawValue == 1000) {
-                    continuation.resume(returning: self.textBox1!.stringValue)
+                    continuation.resume(returning: self.textBox1.stringValue)
                 } else {
                     continuation.resume(returning: nil)
                 }
@@ -86,7 +96,6 @@ class GetPinController {
         guard let okButton = okButton else {
             return
         }
-        print("ValueChanged!!!")
         if(textBox1.stringValue != textBox2.stringValue) {
             okButton.isEnabled = false
         } else {
