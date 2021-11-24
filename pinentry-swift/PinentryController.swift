@@ -157,7 +157,7 @@ class PinentryController {
                     case "BYE":
                         self.ByeFunc()
                     default:
-                        printStdout("ERR Not Implemented")
+                        printStdout("ERR 536871187 Unknown IPC command")
                     }
                 }
                 // say goodbye when EOF
