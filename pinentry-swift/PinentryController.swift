@@ -132,8 +132,6 @@ class PinentryController {
                         default:
                             printStdout("OK")
                         }
-                    case "GETINFO":
-                        printStdout("ERR")
                     case "SETERROR":
                         self.errorText = PinentryController.getStrTail(str: str)
                         // on errer, clear the cache
@@ -146,9 +144,10 @@ class PinentryController {
                     case "BYE":
                         self.ByeFunc()
                     default:
-                        printStdout("ERR")
+                        printStdout("ERR Not Implemented")
                     }
                 }
+                // say goodbye when EOF
                 self?.ByeFunc()
             }
         }

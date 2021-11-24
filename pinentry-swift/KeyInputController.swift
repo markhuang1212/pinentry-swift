@@ -23,12 +23,17 @@ class KeyInputController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.wantsLayer = true
-//        view.layer?.backgroundColor = NSColor.red.cgColor
         okButton.action = #selector(onOk)
         cancelButton.action = #selector(onCancel)
         psdInput.placeholderString = "Password"
         timeoutTextField.stringValue = ""
+    }
+    
+    override func viewDidDisappear() {
+        actionCondition.lock()
+        action = 2
+        actionCondition.signal()
+        actionCondition.unlock()
     }
     
     var action = 0 // 1: ok, 2: cancel
@@ -87,8 +92,6 @@ class KeyInputController: NSViewController {
                 self?.actionCondition.unlock()
             }
         }
-//        print(view.fittingSize)
-//        view.frame.size = view.fittingSize
     }
     
     func waitForPin() async -> String? {

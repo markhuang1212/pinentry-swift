@@ -8,26 +8,20 @@
 import Cocoa
 import os
 
-class WindowDelegate: NSObject, NSWindowDelegate {
-    func windowWillClose(_ notification: Notification) {
-        print("Window Closed!")
-        NSApp.terminate(self)
-    }
-}
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
     var contentViewController: KeyInputController!
-    var windowDelegate: NSWindowDelegate!
+//    var windowDelegate: NSWindowDelegate!
     
     func showPasswordInputWindow(pctrl: PinentryController) {
         if(window == nil) {
             window = NSWindow()
             window.styleMask = [.titled, .miniaturizable, .closable, .resizable]
-            windowDelegate = WindowDelegate()
+//            windowDelegate = WindowDelegate()
             window.title = "Pinentry Swift"
-            window.delegate = windowDelegate
+//            window.delegate = windowDelegate
             contentViewController = KeyInputController()
             window.contentViewController = contentViewController
             window.center()
@@ -41,10 +35,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                            prompt: pctrl.prompt,
                                            errorText: pctrl.errorText,
                                            timeout: pctrl.timeout)
-
-//        window.setContentSize(contentViewController.view.frame.size)
-//        window.frame.size = window.contentView?.fittingSize
-//        window.makeKeyAndOrderFront(self)
         window.setContentSize(window.contentView!.fittingSize)
         NSApp.activate(ignoringOtherApps: true)
     }
