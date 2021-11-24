@@ -10,12 +10,23 @@
 		8607A7C5274BD4FC00C20CF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607A7C4274BD4FC00C20CF4 /* AppDelegate.swift */; };
 		8607A7C9274BD4FE00C20CF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8607A7C8274BD4FE00C20CF4 /* Assets.xcassets */; };
 		8607A7F1274C600F00C20CF4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607A7F0274C600F00C20CF4 /* main.swift */; };
-		86853745274C99E70078F3A2 /* KeyInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86853743274C99E70078F3A2 /* KeyInputController.swift */; };
-		86853746274C99E70078F3A2 /* KeyInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86853744274C99E70078F3A2 /* KeyInputController.xib */; };
 		86853748274CA5A70078F3A2 /* PinentryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86853747274CA5A70078F3A2 /* PinentryController.swift */; };
 		8685374A274CC7310078F3A2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86853749274CC7310078F3A2 /* Utils.swift */; };
 		8685374E274CD6A90078F3A2 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8685374D274CD6A90078F3A2 /* KeychainSwift */; };
+		869DC439274E20FF0043582F /* pinentry_swiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DC438274E20FF0043582F /* pinentry_swiftUITests.swift */; };
+		869DC43B274E20FF0043582F /* pinentry_swiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DC43A274E20FF0043582F /* pinentry_swiftUITestsLaunchTests.swift */; };
+		869DC442274E35DB0043582F /* GetPinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DC441274E35DB0043582F /* GetPinController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		869DC43C274E20FF0043582F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8607A7B9274BD4FC00C20CF4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8607A7C0274BD4FC00C20CF4;
+			remoteInfo = "pinentry-swift";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8607A7C1274BD4FC00C20CF4 /* pinentry-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pinentry-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,10 +35,12 @@
 		8607A7CD274BD4FE00C20CF4 /* pinentry-swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "pinentry-swift.entitlements"; sourceTree = "<group>"; };
 		8607A7EF274C5FD000C20CF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8607A7F0274C600F00C20CF4 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		86853743274C99E70078F3A2 /* KeyInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyInputController.swift; sourceTree = "<group>"; };
-		86853744274C99E70078F3A2 /* KeyInputController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeyInputController.xib; sourceTree = "<group>"; };
 		86853747274CA5A70078F3A2 /* PinentryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinentryController.swift; sourceTree = "<group>"; };
 		86853749274CC7310078F3A2 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		869DC436274E20FF0043582F /* pinentry-swiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pinentry-swiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		869DC438274E20FF0043582F /* pinentry_swiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pinentry_swiftUITests.swift; sourceTree = "<group>"; };
+		869DC43A274E20FF0043582F /* pinentry_swiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pinentry_swiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		869DC441274E35DB0043582F /* GetPinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPinController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +52,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		869DC433274E20FF0043582F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -46,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				8607A7C3274BD4FC00C20CF4 /* pinentry-swift */,
+				869DC437274E20FF0043582F /* pinentry-swiftUITests */,
 				8607A7C2274BD4FC00C20CF4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				8607A7C1274BD4FC00C20CF4 /* pinentry-swift.app */,
+				869DC436274E20FF0043582F /* pinentry-swiftUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -63,15 +85,23 @@
 			children = (
 				8607A7EF274C5FD000C20CF4 /* Info.plist */,
 				8607A7C4274BD4FC00C20CF4 /* AppDelegate.swift */,
-				86853743274C99E70078F3A2 /* KeyInputController.swift */,
-				86853744274C99E70078F3A2 /* KeyInputController.xib */,
 				86853747274CA5A70078F3A2 /* PinentryController.swift */,
 				8607A7F0274C600F00C20CF4 /* main.swift */,
 				86853749274CC7310078F3A2 /* Utils.swift */,
+				869DC441274E35DB0043582F /* GetPinController.swift */,
 				8607A7C8274BD4FE00C20CF4 /* Assets.xcassets */,
 				8607A7CD274BD4FE00C20CF4 /* pinentry-swift.entitlements */,
 			);
 			path = "pinentry-swift";
+			sourceTree = "<group>";
+		};
+		869DC437274E20FF0043582F /* pinentry-swiftUITests */ = {
+			isa = PBXGroup;
+			children = (
+				869DC438274E20FF0043582F /* pinentry_swiftUITests.swift */,
+				869DC43A274E20FF0043582F /* pinentry_swiftUITestsLaunchTests.swift */,
+			);
+			path = "pinentry-swiftUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,6 +127,24 @@
 			productReference = 8607A7C1274BD4FC00C20CF4 /* pinentry-swift.app */;
 			productType = "com.apple.product-type.application";
 		};
+		869DC435274E20FF0043582F /* pinentry-swiftUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 869DC440274E20FF0043582F /* Build configuration list for PBXNativeTarget "pinentry-swiftUITests" */;
+			buildPhases = (
+				869DC432274E20FF0043582F /* Sources */,
+				869DC433274E20FF0043582F /* Frameworks */,
+				869DC434274E20FF0043582F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				869DC43D274E20FF0043582F /* PBXTargetDependency */,
+			);
+			name = "pinentry-swiftUITests";
+			productName = "pinentry-swiftUITests";
+			productReference = 869DC436274E20FF0043582F /* pinentry-swiftUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -109,6 +157,10 @@
 				TargetAttributes = {
 					8607A7C0274BD4FC00C20CF4 = {
 						CreatedOnToolsVersion = 13.1;
+					};
+					869DC435274E20FF0043582F = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 8607A7C0274BD4FC00C20CF4;
 					};
 				};
 			};
@@ -129,6 +181,7 @@
 			projectRoot = "";
 			targets = (
 				8607A7C0274BD4FC00C20CF4 /* pinentry-swift */,
+				869DC435274E20FF0043582F /* pinentry-swiftUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -139,7 +192,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8607A7C9274BD4FE00C20CF4 /* Assets.xcassets in Resources */,
-				86853746274C99E70078F3A2 /* KeyInputController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		869DC434274E20FF0043582F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,14 +210,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				86853748274CA5A70078F3A2 /* PinentryController.swift in Sources */,
-				86853745274C99E70078F3A2 /* KeyInputController.swift in Sources */,
 				8607A7C5274BD4FC00C20CF4 /* AppDelegate.swift in Sources */,
 				8685374A274CC7310078F3A2 /* Utils.swift in Sources */,
+				869DC442274E35DB0043582F /* GetPinController.swift in Sources */,
 				8607A7F1274C600F00C20CF4 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		869DC432274E20FF0043582F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				869DC439274E20FF0043582F /* pinentry_swiftUITests.swift in Sources */,
+				869DC43B274E20FF0043582F /* pinentry_swiftUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		869DC43D274E20FF0043582F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8607A7C0274BD4FC00C20CF4 /* pinentry-swift */;
+			targetProxy = 869DC43C274E20FF0043582F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8607A7E4274BD4FF00C20CF4 /* Debug */ = {
@@ -330,6 +406,50 @@
 			};
 			name = Release;
 		};
+		869DC43E274E20FF0043582F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 87RPRRD94N;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.hmplayground.pinentry-swiftUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "pinentry-swift";
+			};
+			name = Debug;
+		};
+		869DC43F274E20FF0043582F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 87RPRRD94N;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.hmplayground.pinentry-swiftUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "pinentry-swift";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -347,6 +467,15 @@
 			buildConfigurations = (
 				8607A7E7274BD4FF00C20CF4 /* Debug */,
 				8607A7E8274BD4FF00C20CF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		869DC440274E20FF0043582F /* Build configuration list for PBXNativeTarget "pinentry-swiftUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				869DC43E274E20FF0043582F /* Debug */,
+				869DC43F274E20FF0043582F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

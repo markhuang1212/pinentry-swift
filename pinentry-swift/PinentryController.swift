@@ -33,6 +33,8 @@ class PinentryController {
     var errorText: String? = nil
     var pinCache: String? = nil
     var confirmMode = false
+    var repeatText: String? = nil
+    var repeatErrText: String? = nil
     
     var buttonOkText: String? = nil
     var buttonCancelText: String? = nil
@@ -105,6 +107,8 @@ class PinentryController {
                         if pin != nil {
                             if isFromCache {
                                 printStdout("S PASSWORD_FROM_CACHE")
+                            } else if self.repeatText != nil {
+                                printStdout("S PIN_REPEATED")
                             }
                             if self.cacheEnabled && self.keyInfo != nil {
                                 self.SavePinFunc(self.keyInfo!, pin!)
@@ -145,6 +149,12 @@ class PinentryController {
                         }
                         printStdout("OK")
                     case "SETNOTOK", "SETQUALITYBAR", "SETQUALITYBAR_TT", "MESSAGE":
+                        printStdout("OK")
+                    case "SETREPEAT":
+                        self.repeatText = PinentryController.getStrTail(str: str)
+                        printStdout("OK")
+                    case "SETREPEATERROR":
+                        self.repeatErrText = PinentryController.getStrTail(str: str)
                         printStdout("OK")
                     case "BYE":
                         self.ByeFunc()

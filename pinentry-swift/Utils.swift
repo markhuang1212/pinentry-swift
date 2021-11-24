@@ -19,7 +19,8 @@ func ConfirmAccessWithBiometrics(reason: String) async -> Bool {
 }
 
 func defaultGetPinFunc(_ controller: PinentryController) async -> String? {
-    return nil
+    let ctrl = GetPinController()
+    return await ctrl.GetPin(controller)
 }
 
 func defaultGetPinFromCacheFunc(keyinfo: String) async -> String? {
@@ -53,9 +54,6 @@ func defaultConfirmFunc(_ controller: PinentryController) async -> Bool {
             
         }
     }
-
-
-//    return await ConfirmAccessWithBiometrics(reason: controller.description ?? "Confirm")
 }
 
 func defaultSavePinFunc(keyinfo: String, pin: String) {
