@@ -54,7 +54,7 @@ class KeyInputController: NSViewController {
     }
     
     func updateWindow(titleText: String?, descriptionText: String?, okText: String?,
-                      cancelText: String?, prompt: String?, errorText: String?, timeout: Int?) {
+                      cancelText: String?, prompt: String?, errorText: String?, timeout: Int?, confirmingMode: Bool) {
         psdInput.stringValue = ""
         if let titleText = titleText {
             titleTextField.stringValue = titleText
@@ -75,6 +75,9 @@ class KeyInputController: NSViewController {
         }
         if let prompt = prompt {
             psdInput.placeholderString = prompt
+        }
+        if confirmingMode {
+            psdInput.isEditable = false
         }
         if let timeout = timeout {
             DispatchQueue.global(qos: .background).async { [timeout, weak self] in

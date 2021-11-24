@@ -21,7 +21,7 @@ class PinentryController {
     var CancelFunc = {}
     var GetPinFunc = defaultGetPinFunc
     var GetPinFromCacheFunc: (_ keyinfo: String) async -> String? = defaultGetPinFromCacheFunc
-    var GetConfirmFunc: () async -> Bool = defaultConfirmFunc
+    var GetConfirmFunc = defaultConfirmFunc
     var SavePinFunc: (_ keyinfo: String, _ pin: String) -> () = defaultSavePinFunc
     var DelPinFunc = defaultDelPinFunc
     var ByeFunc: () -> () = defaultByeFunc
@@ -32,6 +32,7 @@ class PinentryController {
     var title: String? = nil
     var errorText: String? = nil
     var pinCache: String? = nil
+    var confirmMode = false
     
     var buttonOkText: String? = nil
     var buttonCancelText: String? = nil
@@ -105,7 +106,7 @@ class PinentryController {
                             if isFromCache {
                                 printStdout("S PASSWORD_FROM_CACHE")
                             }
-                            if self.cacheEnabled {
+                            if self.cacheEnabled && self.keyInfo != nil {
                                 self.SavePinFunc(self.keyInfo!, pin!)
                             }
                             printStdout("D \(pin!)")
@@ -114,14 +115,18 @@ class PinentryController {
                             printStdout("ERR")
                         }
                     case "CONFIRM":
-                        if await self.GetConfirmFunc() {
+                        if await self.GetConfirmFunc(self) {
                             printStdout("OK")
                         } else {
                             printStdout("ERR ASSUAN_Not_Confirmed")
                         }
                     case "SETKEYINFO":
                         let key = PinentryController.getStrTail(str: str)
-                        self.keyInfo = key
+                        if(key.starts(with: "--clear")) {
+                            self.keyInfo = nil
+                        } else {
+                            self.keyInfo = key
+                        }
                         printStdout("OK")
                     case "OPTION":
                         let option = String(cmd[1])

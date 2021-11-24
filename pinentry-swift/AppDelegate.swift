@@ -19,9 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if(window == nil) {
             window = NSWindow()
             window.styleMask = [.titled, .miniaturizable, .closable, .resizable]
-//            windowDelegate = WindowDelegate()
             window.title = "Pinentry Swift"
-//            window.delegate = windowDelegate
             contentViewController = KeyInputController()
             window.contentViewController = contentViewController
             window.center()
@@ -34,7 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                            cancelText: pctrl.buttonCancelText,
                                            prompt: pctrl.prompt,
                                            errorText: pctrl.errorText,
-                                           timeout: pctrl.timeout)
+                                           timeout: pctrl.timeout,
+                                           confirmingMode: false)
         window.setContentSize(window.contentView!.fittingSize)
         NSApp.activate(ignoringOtherApps: true)
     }
@@ -49,6 +48,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             return await self.contentViewController.waitForPin()
         }
+        
+//        PinentryController.shared.GetConfirmFunc = { pctrl in
+//
+//        }
         
         PinentryController.shared.run()
         logger.log("pinentry controller started")

@@ -24,7 +24,7 @@ func defaultGetPinFunc(_ controller: PinentryController) async -> String? {
 
 func defaultGetPinFromCacheFunc(keyinfo: String) async -> String? {
     if let ret = keychain.get(keyinfo) {
-        if await defaultConfirmFunc() {
+        if await ConfirmAccessWithBiometrics(reason: "Confirm Access to key \(keyinfo)") {
             return ret
         }
     }
@@ -35,8 +35,27 @@ func defaultDelPinFunc(keyinfo: String) {
     keychain.delete(keyinfo)
 }
 
-func defaultConfirmFunc() async -> Bool {
-    return await ConfirmAccessWithBiometrics(reason: "Confirm")
+func defaultConfirmFunc(_ controller: PinentryController) async -> Bool {
+    return await withCheckedContinuation() { continuation in
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.addButton(withTitle: controller.buttonOkText ?? "Ok")
+            alert.addButton(withTitle: controller.buttonCancelText ?? "Cancel")
+            alert.messageText = controller.title ?? "Confirm"
+            alert.informativeText = controller.description ?? ""
+            NSApp.activate(ignoringOtherApps: true)
+            let ret = alert.runModal()
+            if(ret.rawValue == 1000) {
+                continuation.resume(returning: true)
+            } else {
+                continuation.resume(returning: false)
+            }
+            
+        }
+    }
+
+
+//    return await ConfirmAccessWithBiometrics(reason: controller.description ?? "Confirm")
 }
 
 func defaultSavePinFunc(keyinfo: String, pin: String) {
