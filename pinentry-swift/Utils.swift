@@ -40,6 +40,7 @@ func defaultConfirmFunc(_ controller: PinentryController) async -> Bool {
     return await withCheckedContinuation() { continuation in
         DispatchQueue.main.async {
             let alert = NSAlert()
+            alert.icon = NSImage(systemSymbolName: "exclamationmark.triangle", accessibilityDescription: nil)
             alert.addButton(withTitle: controller.buttonOkText ?? "Ok")
             alert.addButton(withTitle: controller.buttonCancelText ?? "Cancel")
             alert.messageText = controller.title ?? "Confirm"
