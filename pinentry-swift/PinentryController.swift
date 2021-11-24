@@ -10,39 +10,6 @@ import Cocoa
 import KeychainSwift
 import os
 
-let keychain = KeychainSwift()
-
-func defaultGetPinFunc(_ controller: PinentryController) async -> String? {
-    return nil
-}
-
-func defaultGetPinFromCacheFunc(keyinfo: String) async -> String? {
-    if let ret = keychain.get(keyinfo) {
-        if await defaultConfirmFunc() {
-            return ret
-        }
-    }
-    return nil
-}
-
-func defaultDelPinFunc(keyinfo: String) {
-    keychain.delete(keyinfo)
-}
-
-func defaultConfirmFunc() async -> Bool {
-    return await ConfirmAccessWithBiometrics(reason: "Confirm")
-}
-
-func defaultSavePinFunc(keyinfo: String, pin: String) {
-    keychain.set(pin, forKey: keyinfo)
-}
-
-func defaultByeFunc() {
-    DispatchQueue.main.async {
-        NSApp.terminate(nil)
-    }
-}
-
 class PinentryController {
     
     static let shared = PinentryController()
