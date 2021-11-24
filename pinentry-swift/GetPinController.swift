@@ -34,6 +34,7 @@ class GetPinController {
                     return
                 }
                 let alert = NSAlert()
+                alert.icon = NSImage(systemSymbolName: "rectangle.and.pencil.and.ellipsis", accessibilityDescription: nil)
                 alert.messageText = controller.title ?? "Pin Entry"
                 alert.informativeText = controller.description ?? "No Description Provided"
                 alert.addButton(withTitle: controller.buttonOkText ?? "OK")
@@ -42,8 +43,6 @@ class GetPinController {
                 self.textBox1 = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
                 self.textBox1!.placeholderString = controller.prompt ?? "Passpharse"
                 alert.accessoryView = self.textBox1!
-//                self.alertDelegate = AlertDelegate()
-//                self.alertDelegate?.firstResponder = self.textBox1
                 
                 if(controller.repeatText != nil) {
                     let stack = NSStackView(frame: NSRect(x: 0, y: 0, width: 200, height: 58))
@@ -65,7 +64,6 @@ class GetPinController {
                 }
                 alert.window.initialFirstResponder = self.textBox1!
                 NSApp.activate(ignoringOtherApps: true)
-//                self.textBox1?.becomeFirstResponder()
                 let ret = alert.runModal()
                 
                 if(ret.rawValue == 1000) {
