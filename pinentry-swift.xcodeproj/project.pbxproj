@@ -16,6 +16,7 @@
 		869DC439274E20FF0043582F /* pinentry_swiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DC438274E20FF0043582F /* pinentry_swiftUITests.swift */; };
 		869DC43B274E20FF0043582F /* pinentry_swiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DC43A274E20FF0043582F /* pinentry_swiftUITestsLaunchTests.swift */; };
 		869DC442274E35DB0043582F /* GetPinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869DC441274E35DB0043582F /* GetPinController.swift */; };
+		86FE05E2274E7DCB001C68D0 /* AppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FE05E1274E7DCB001C68D0 /* AppMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		869DC438274E20FF0043582F /* pinentry_swiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pinentry_swiftUITests.swift; sourceTree = "<group>"; };
 		869DC43A274E20FF0043582F /* pinentry_swiftUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pinentry_swiftUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		869DC441274E35DB0043582F /* GetPinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPinController.swift; sourceTree = "<group>"; };
+		86FE05E1274E7DCB001C68D0 /* AppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				8607A7C4274BD4FC00C20CF4 /* AppDelegate.swift */,
 				86853747274CA5A70078F3A2 /* PinentryController.swift */,
 				8607A7F0274C600F00C20CF4 /* main.swift */,
+				86FE05E1274E7DCB001C68D0 /* AppMenu.swift */,
 				86853749274CC7310078F3A2 /* Utils.swift */,
 				869DC441274E35DB0043582F /* GetPinController.swift */,
 				8607A7C8274BD4FE00C20CF4 /* Assets.xcassets */,
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86FE05E2274E7DCB001C68D0 /* AppMenu.swift in Sources */,
 				86853748274CA5A70078F3A2 /* PinentryController.swift in Sources */,
 				8607A7C5274BD4FC00C20CF4 /* AppDelegate.swift in Sources */,
 				8685374A274CC7310078F3A2 /* Utils.swift in Sources */,

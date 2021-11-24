@@ -30,4 +30,7 @@ logger.log("AppDelegate initialized")
 app.delegate = delegate
 logger.log("AppDelegate assigned")
 
+let menu = AppMenu()
+NSApplication.shared.mainMenu = menu
+
 let _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
