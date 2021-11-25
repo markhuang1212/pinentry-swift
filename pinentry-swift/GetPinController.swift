@@ -32,10 +32,12 @@ class GetPinController {
     func GetPin(_ controller: PinentryController) async -> String? {
         return await withCheckedContinuation() { continuation in
             DispatchQueue.main.async { [weak self] in
+                
                 guard let self = self else {
                     continuation.resume(returning: nil)
                     return
                 }
+                
                 let alert = NSAlert()
                 alert.icon = NSImage(systemSymbolName: "rectangle.and.pencil.and.ellipsis", accessibilityDescription: nil)
                 alert.messageText = controller.title ?? "Pin Entry"
@@ -45,7 +47,6 @@ class GetPinController {
                 
                 self.textBox1 = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
                 self.textBox1.placeholderString = controller.prompt ?? "Passpharse"
-                
                 
                 if(controller.repeatText != nil) {
                     
