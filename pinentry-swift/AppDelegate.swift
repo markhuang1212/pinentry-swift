@@ -7,6 +7,7 @@
 
 import Cocoa
 
+// AppDelegate starts the pinentry controller when the NSApp is ready
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {

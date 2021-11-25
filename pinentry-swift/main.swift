@@ -12,6 +12,13 @@ import os
 
 let logger = Logger()
 
+func printStdoutPrivate(_ str: String) {
+    var newStr = str
+    newStr.append("\n")
+    logger.log("STDOUT <PRIVATE>")
+    FileHandle.standardOutput.write(newStr.data(using: .utf8)!)
+}
+
 func printStdout(_ str: String) {
     var newStr = str
     newStr.append("\n")

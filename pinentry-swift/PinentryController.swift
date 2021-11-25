@@ -15,8 +15,6 @@ class PinentryController {
     var cacheEnabled = false
     var keyInfo: String? = nil
     
-    var OkFunc = {}
-    var CancelFunc = {}
     var GetPinFunc = defaultGetPinFunc
     var GetPinFromCacheFunc = defaultGetPinFromCacheFunc
     var GetConfirmFunc = defaultConfirmFunc
@@ -29,17 +27,11 @@ class PinentryController {
     var prompt: String? = nil
     var title: String? = nil
     var errorText: String? = nil
-    var pinCache: String? = nil
-    var confirmMode = false
     var repeatText: String? = nil
     var repeatErrText: String? = nil
     
     var buttonOkText: String? = nil
     var buttonCancelText: String? = nil
-    
-    init(){
-        
-    }
     
     static func getStrTail(str: String) -> String {
         guard let x = str.firstIndex(of: " ") else {
@@ -111,7 +103,7 @@ class PinentryController {
                             if self.cacheEnabled && self.keyInfo != nil {
                                 self.SavePinFunc(self.keyInfo!, pin!)
                             }
-                            printStdout("D \(pin!)")
+                            printStdoutPrivate("D \(pin!)")
                             printStdout("OK")
                         } else {
                             printStdout("ERR 83886179 Operation cancelled <Pinentry>")
